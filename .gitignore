@@ -1,5 +1,18 @@
-*.class
-*.log
+# Python
+.venv/
+__pycache__/
+*.pyc
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# IDE
+.idea/
+.vscode/
+
+# Data (never commit datasets)
+data/
+
+# Spark outputs
+*.parquet
+*.crc
+
+# OS files
+.DS_Store
