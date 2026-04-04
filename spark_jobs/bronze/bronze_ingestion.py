@@ -36,9 +36,9 @@ if __name__ == "__main__":
         col("info.dates")[0].alias("match_date"),
         col("info.teams").alias("teams"),
 
-        to_json(col("info.toss")).alias("toss_json"),
-        to_json(col("info.outcome")).alias("outcome_json"),
-        to_json(col("info")).alias("info_json")
+        col("info.toss").alias("toss"),
+        col("info.outcome").alias("outcome"),
+        col("info").alias("info")
     )
 #     Build Bronze_delivery
     df_innings = df.select("*",posexplode(col("innings")).alias("inning_number","inning"))
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
         col("inning_number"),
         col("inning.team").alias("batting_team"),
-        col("inning.super_over").cast("string").alias("super_over_flag"),
+        col("inning.super_over").alias("super_over_flag"),
         col("over_data.over").alias("over_number"),
         col("ball_number"),
         col("delivery")
