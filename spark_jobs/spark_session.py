@@ -1,13 +1,29 @@
 from pyspark.sql import SparkSession
 
 def get_spark_session():
-    spark = SparkSession.builder \
-           .appName("IPL Analytics Platform-Simple") \
-           .master("local[*]") \
-           .getOrCreate()
-    spark.sparkContext.setLogLevel("ERROR")
+    return (
+        SparkSession.builder
+        .appName("IPL Analytics")
 
-    return spark
+        # 🔥 THIS IS THE FIX
+        .config(
+            "spark.jars",
+            "/opt/jars/postgresql-42.6.0.jar"
+        )
+
+        .config(
+            "spark.driver.extraClassPath",
+            "/opt/jars/postgresql-42.6.0.jar"
+        )
+
+        .config(
+            "spark.executor.extraClassPath",
+            "/opt/jars/postgresql-42.6.0.jar"
+        )
+
+        .getOrCreate()
+    )
+
 
 if __name__ == "__main__":
     spark = get_spark_session()
